@@ -56,9 +56,9 @@ void setup()
 
 void loop()
 {
-	//char i2cMethod = choseI2cAddress(); // Get the seleted i2c address method selected
-	mainMenu();
-  	
+  //char i2cMethod = choseI2cAddress(); // Get the seleted i2c address method selected
+  mainMenu();
+    
 
 
       pinMode(A0, INPUT);
@@ -119,8 +119,8 @@ void Melody()
 
 char choseI2cAddress(){
     // Permit the user to chose its way to get an address (static or auto)
-  	char key = keypad.getKey();
-  	if (key == NO_KEY) {
+    char key = keypad.getKey();
+    if (key == NO_KEY) {
       // Input the message to be sent
       lcd.setCursor(0, 0);
       lcd.print("Select addr");
@@ -146,7 +146,7 @@ char choseI2cAddress(){
           lcd.print("2 selected");
           break;
         }
-      }	
+      } 
       delay(1000);
       return key;
     }
@@ -160,29 +160,29 @@ void mainMenu(){
       case '1':
         //show help
         lcd.clear();
-      	displayInfos(texts);
+        displayInfos(texts);
         break;
       case '2':
         //show contacts
-      	Serial.print("2");
-     	lcd.clear();
-      	displayInfos(contacts);
+        Serial.print("2");
+      lcd.clear();
+        displayInfos(contacts);
         break;
       case '3':
         // show menu to send message
-      	Serial.print("3");
-		lcd.clear();
-      	sendMessage();
+        Serial.print("3");
+    lcd.clear();
+        sendMessage();
         break;
       case '4':
         //Composer
-      	lcd.clear();
-      	sendMessage();
+        lcd.clear();
+        sendMessage();
         break;
       case '5':
         //Composer
-      	parseList(msgTest,5);
-      	
+        parseList(msgTest,5);
+        
          break;
       default:
         // if nothing else matches, do the default
@@ -192,9 +192,9 @@ void mainMenu(){
   } 
 }
 
-void sendMessageToSalve(String message) {
+void sendMessageToSalve(char msg[]) {
   Wire.beginTransmission(0x2A); // set recipient Arduino's address
-  Wire.write(message); // send message
+  Wire.write(msg); // send message
   Wire.endTransmission();       // end transmission
   delay(1000);                  // wait for a second
 }
@@ -233,11 +233,11 @@ void parseList(char msgTest[], int iterator){
   for(int x = 0; x < iterator; x++){
     //Serial.println(x);
     if(msgTest[x] == '0'){
-      	temp = "";
-      	Serial.println("PARSE");
-      	
+        temp = "";
+        Serial.println("PARSE");
+        
     } else{
-    	temp += msgTest[x];
+      temp += msgTest[x];
     }
   }
 }
